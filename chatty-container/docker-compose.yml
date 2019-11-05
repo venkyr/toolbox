@@ -1,0 +1,22 @@
+version: '3.5'
+
+# The following environment variables must be set
+# APPNAME: Name of app (e.g. crm)
+# ENV: Env of app (e.g. prod/stage/test)
+# PORT: For HTTPS access
+# NETWORK: The docker network to use
+
+services:
+  server:
+    build: server
+    image: ship/server
+    privileged: true
+    networks:
+      - vnet
+
+networks:
+  vnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.230.0/24
